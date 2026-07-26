@@ -1,8 +1,7 @@
 # AI-Idea-Evaluation-System
-# AI Idea Evaluation System
 
 ## Project Overview
-An AI-powered system that evaluates innovative ideas based on predefined criteria using a locally hosted Large Language Model (Ollama).
+An AI-powered system that evaluates innovative ideas based on predefined criteria using a Large Language Model.
 
 ## Project Structure
 
