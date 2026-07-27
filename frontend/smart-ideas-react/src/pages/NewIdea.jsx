@@ -1,0 +1,20 @@
+import { useState } from 'react';
+import { ArrowLeft, ArrowRight, Save, Send, CheckCircle2 } from 'lucide-react';
+import PageTitle from '../components/PageTitle';
+
+const initial={title:'',description:'',department:'',category:'',problem:'',solution:'',benefits:'',targetUsers:'',duration:''};
+export default function NewIdea({ onCreate, loading }){
+ const [step,setStep]=useState(1); const [form,setForm]=useState(initial); const [error,setError]=useState('');
+ const set=(k,v)=>setForm({...form,[k]:v});
+ const next=()=>{setError(''); if(step===1&&(!form.title||!form.description))return setError('أكملي عنوان الفكرة ووصفها.'); if(step===2&&(!form.problem||!form.solution||!form.benefits))return setError('أكملي المشكلة والحل والفوائد.'); setStep(Math.min(3,step+1));};
+ const submit=async(status)=>{setError(''); try{await onCreate({...form,status}); setForm(initial);setStep(1);}catch(e){setError(e.message)}};
+ return <div className="page-container inner-page"><PageTitle title="إضافة فكرة جديدة" description="أدخلي تفاصيل الفكرة ثم أرسليها للتحليل الذكي."/>
+ <section className="form-card idea-form">
+  <div className="steps"><div className={step>=1?'active':''}><b>1</b><span>معلومات الفكرة</span></div><div className={step>=2?'active':''}><b>2</b><span>المشكلة والحل</span></div><div className={step>=3?'active':''}><b>3</b><span>المراجعة والإرسال</span></div></div>
+  {step===1&&<div className="form-grid"><label className="full">عنوان الفكرة *<input value={form.title} onChange={e=>set('title',e.target.value)} maxLength={120} placeholder="مثال: نظام ذكي لتحسين متابعة البلاغات"/></label><label className="full">وصف الفكرة *<textarea value={form.description} onChange={e=>set('description',e.target.value)} placeholder="اشرحي الفكرة بوضوح..."/></label><label>الإدارة<select value={form.department} onChange={e=>set('department',e.target.value)}><option value="">اختياري</option><option>تقنية المعلومات</option><option>خدمة المستفيدين</option><option>التخطيط والتطوير</option><option>المشاريع</option><option>الموارد البشرية</option></select></label><label>التصنيف<select value={form.category} onChange={e=>set('category',e.target.value)}><option value="">اختياري</option><option>التحول الرقمي</option><option>تحسين الخدمات البلدية</option><option>تجربة المستفيد</option><option>الاستدامة والبيئة</option><option>المدن الذكية</option><option>خفض التكاليف</option></select></label></div>}
+  {step===2&&<div className="form-grid"><label className="full">المشكلة أو الفرصة *<textarea value={form.problem} onChange={e=>set('problem',e.target.value)}/></label><label className="full">الحل المقترح *<textarea value={form.solution} onChange={e=>set('solution',e.target.value)}/></label><label className="full">الفوائد المتوقعة *<textarea value={form.benefits} onChange={e=>set('benefits',e.target.value)}/></label><label>الفئات المستفيدة<input value={form.targetUsers} onChange={e=>set('targetUsers',e.target.value)}/></label><label>المدة المتوقعة<input value={form.duration} onChange={e=>set('duration',e.target.value)} placeholder="مثال: 3 أشهر"/></label></div>}
+  {step===3&&<div className="review-box"><CheckCircle2 size={30}/><h2>{form.title}</h2><dl><div><dt>الوصف</dt><dd>{form.description}</dd></div><div><dt>الإدارة والتصنيف</dt><dd>{form.department||'غير محدد'} — {form.category||'غير محدد'}</dd></div><div><dt>المشكلة</dt><dd>{form.problem}</dd></div><div><dt>الحل</dt><dd>{form.solution}</dd></div><div><dt>الفوائد</dt><dd>{form.benefits}</dd></div></dl></div>}
+  {error&&<div className="form-error">{error}</div>}
+  <div className="form-actions">{step>1&&<button className="secondary-button" onClick={()=>setStep(step-1)}><ArrowRight size={18}/>السابق</button>}<span></span>{step<3?<><button className="ghost-button" onClick={()=>submit('draft')} disabled={loading}><Save size={18}/>حفظ كمسودة</button><button className="primary-button" onClick={next}>التالي<ArrowLeft size={18}/></button></>:<button className="primary-button" onClick={()=>submit('processing')} disabled={loading}><Send size={18}/>{loading?'جاري الإرسال...':'إرسال للتقييم'}</button>}</div>
+ </section></div>;
+}
