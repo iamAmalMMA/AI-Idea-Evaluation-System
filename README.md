@@ -1,17 +1,20 @@
-# AI-Idea-Evaluation-System
+# منصة الأفكار الذكية
 
-## Project Overview
-An AI-powered system that evaluates innovative ideas based on predefined criteria using a Large Language Model.
+نسخة Frontend/Prototype بلغة PHP جاهزة للعرض والربط مع Backend وAI حقيقي.
 
-## Project Structure
+## البداية السريعة
+1. انسخ المجلد إلى `C:\xampp\htdocs\AI-Idea-Evaluation`.
+2. شغّل Apache من XAMPP.
+3. افتح `http://localhost/AI-Idea-Evaluation/`.
+4. افتح المجلد الرئيسي نفسه في VS Code عبر **File → Open Folder**.
 
-- `frontend/` - User Interface
-- `backend/` - API and AI Logic
-- `docs/` - Documentation
+## ملفات البدء للمطور
+- `includes/bootstrap.php`: معالجة النماذج والحالات وقرارات المدير.
+- `includes/functions.php`: الدوال العامة، Top 5، وحدود خدمة AI.
+- `pages/`: واجهات الصفحات.
+- `assets/`: CSS وJavaScript والصور.
+- `database/schema.sql`: مخطط قاعدة البيانات المقترح.
+- `docs/BACKEND-HANDOFF.md`: تعليمات الربط.
+- `docs/AI-CONTRACT.md`: عقد مدخلات ومخرجات AI.
 
-## Team Workflow
-
-- Frontend team works inside `frontend/`
-- Backend team works inside `backend/`
-- Create a new branch before making changes.
-- Open a Pull Request before merging into `main`.
+> البيانات الحالية تجريبية ومحفوظة في `data/*.json`، ويجب استبدالها بمستودع بيانات حقيقي عند الربط.
