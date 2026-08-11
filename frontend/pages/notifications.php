@@ -1,0 +1,4 @@
+<?php
+// Page view: notifications
+?>
+<div class="page-container inner-page"><div class="page-title"><div><h1>الإشعارات</h1><p>آخر التحديثات المتعلقة بأفكارك.</p></div><form method="post"><input type="hidden" name="form_action" value="read_all"><button class="ghost-button"><?=icon('check',18)?>تحديد الكل كمقروء</button></form></div><div class="notifications-list"><?php foreach($visibleNotifications as $n):?><article class="notification-card <?=empty($n['read'])?'unread':''?>"><div class="notification-icon"><?=icon('bell',21)?></div><div><h3><?php if(!empty($n['idea_id'])):?><a href="<?=url('details',['id'=>(string)$n['idea_id']])?>"><?=e($n['title'])?></a><?php else:?><?=e($n['title'])?><?php endif?></h3><p><?=e($n['message'])?></p><small><?=e($n['time'])?></small></div></article><?php endforeach?></div></div>
