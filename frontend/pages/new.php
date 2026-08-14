@@ -16,7 +16,7 @@ $formDescription=(string)($editIdea['description']??'');
 <div class="page-container inner-page">
   <div class="page-title"><div><h1><?=$editIdea?'إكمال المسودة':'إضافة فكرة جديدة'?></h1><p><?=$editIdea?'عدّلي البيانات الناقصة ثم احفظي المسودة أو أرسليها للتحليل الذكي.':'أدخلي المعلومات الأساسية، وسيحلل الذكاء الاصطناعي الفكرة ويقيّمها وفق معايير موحدة.'?></p></div></div>
   <section class="form-card idea-form" data-idea-form data-current-idea-id="<?=e($editingId)?>">
-    <form method="post" novalidate>
+    <form novalidate data-api-form>
       <input type="hidden" name="form_action" value="create_idea"><input type="hidden" name="idea_id" value="<?=e($editingId)?>">
       <div class="steps"><div class="active"><b>1</b><span>بيانات الفكرة</span></div><div><b>2</b><span>تفاصيل الفكرة</span></div><div><b>3</b><span>المراجعة والإرسال</span></div></div>
       <div class="form-step" data-step="1"><div class="form-grid">
