@@ -68,7 +68,7 @@ function ar_date(string $date): string {
     return date('j',$ts).' '.$months[(int)date('n',$ts)].' '.date('Y',$ts);
 }
 function evaluate_idea_with_ai(array $idea): array {
-    $apiUrl = env_value('AI_API_URL');
+    $apiUrl = 'http://localhost/AiProject/AI-Idea-Evaluation-System/backend/api/evaluate.php';
 
     if (!$apiUrl) {
         throw new RuntimeException('لم يتم إعداد رابط خدمة الذكاء الاصطناعي.');
